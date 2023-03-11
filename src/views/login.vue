@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ref, reactive, toRaw } from 'vue';
+import { ref, reactive, toRaw, getCurrentInstance } from 'vue';
 import type { FormRules, FormInstance } from 'element-plus'
-import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
 import { useUserInfoStore } from '@/stores/counter'
 import { getUserInfo } from '@/api/request'
 import processLST from '@/utils/processLST'
+// 使用app.config.globalProperties全局方法
+const { proxy }: any = getCurrentInstance();
+
 const router = useRouter()
 // 引入store
 const store = useUserInfoStore()
@@ -33,41 +35,29 @@ const rules = reactive<FormRules>({
 })
 //登录按钮
 const getForm = async (formEl: FormInstance | undefined) => {
-    LoadingBtn.value = true
     if (!formEl) return
     await formEl.validate((valid) => {
         if (valid) {
             getUserInfo(toRaw(userLogin)).then(res => {
+                LoadingBtn.value = true
                 console.log(res);
-                store.$patch({
-                    token: res.data.token,
-                    userName: res.data.userName
-                })
-                processLST.set('USER_INFO', res.data)
-                // successMsg("登录成功")
-                // setTimeout(() => {
-                //     router.replace("/index")
-                // }, 1000);
-            }).catch((err) => {
-                console.log(err);
-            });
-
-        } else {
-            LoadingBtn.value = false
-            errMsg("登录失败")
+                if (res.data.token) {
+                    store.$patch({
+                        token: res.data.token,
+                        userName: res.data.userName
+                    })
+                    processLST.set('USER_INFO', res.data)
+                    proxy.$successMsg(res.msg)
+                    setTimeout(() => {
+                        router.replace("/")
+                    }, 1000);
+                } else {
+                    proxy.$errMsg(res.msg)
+                    LoadingBtn.value = false
+                }
+            })
         }
     })
-}
-//成功提示
-const successMsg = (message: string) => {
-    ElMessage({
-        message: message,
-        type: 'success',
-    })
-}
-//失败提示
-const errMsg = (message: string) => {
-    ElMessage.error(message)
 }
 </script>
 

@@ -4,7 +4,8 @@ export const useUserInfoStore = defineStore('userInfo', {
   state() {
     return {
       token: '',
-      userName: ''
+      userName: '',
+      permission: 0
     }
   }
 })

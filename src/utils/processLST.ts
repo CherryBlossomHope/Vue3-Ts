@@ -7,7 +7,7 @@ class processLST {
         if (localStorage.getItem(key)) {
             return JSON.parse(localStorage.getItem(key) as string)
         } else {
-            return undefined
+            return false
         }
 
     }

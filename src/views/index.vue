@@ -2,10 +2,7 @@
   <el-container class="layout-container-demo" style="height: 100vh">
     <el-aside width="200px">
       <el-scrollbar>
-        <el-menu
-          :default-openeds="['1']"
-          v-for="(item, index) in tabLists"
-          :key="index">
+        <el-menu :default-openeds="['1']" v-for="(item, index) in tabLists" :key="index">
           <el-sub-menu :index="item.indexNum">
             <template #title>
               <el-icon>
@@ -14,11 +11,9 @@
               {{ item.title }}
             </template>
             <el-menu-item-group>
-              <el-menu-item
-                :index="items.indexNum"
-                v-for="(items, index) in item.children"
-                :key="index"
-                @click="tabListRoter(items.path)">
+              <el-menu-item :index="items.indexNum" v-for="(items, index) in item.children" :key="index"
+                @click="tabListRoter(items.path)"
+                :style="items.title == route.meta.title ? 'color:var(--el-menu-active-color)' : ''">
                 <el-icon>
                   <component :is="items.icon" />
                 </el-icon>
@@ -44,7 +39,7 @@
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-          <span>Tom</span>
+          <span>{{ userPermission[store.permission] }}</span>
         </div>
       </el-header>
       <el-main>
@@ -58,12 +53,16 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
+import { useUserInfoStore } from '@/stores/counter';
+import { userPermission } from '@/types/userPermission'
+const store = useUserInfoStore()
 const router = useRouter();
+const route = useRoute()
 
 // 菜单路由跳转
 const tabListRoter = (path: string) => {
-  router.push(`/index/${path}`);
+  router.push(`/${path}`);
 };
 
 //菜单列表

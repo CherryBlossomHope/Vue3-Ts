@@ -2,6 +2,16 @@ import axios from 'axios';
 import { ElMessage } from 'element-plus';
 import processLST from '@/utils/processLST'
 
+
+// 处理  类型“AxiosResponse<any, any>”上不存在属性
+declare module "axios" {
+    interface AxiosResponse<T = any> {
+        msg: any;
+        // 这里追加你的参数
+    }
+    export function create(config?: AxiosRequestConfig): AxiosInstance;
+}
+
 // 创建axios实例
 const request = axios.create({
     // 请求的域名，基本地址，proxy 代理时会将“/api”以及前置字符串会被替换为真正域名
