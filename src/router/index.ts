@@ -56,10 +56,10 @@ router.beforeEach((to, from, next) => {
   if (to.path == '/') {
     if (processLST.get('USER_INFO')) {
       getUserInfo({}).then(res => {
-        ElMessage({
-          message: res.msg,
-          type: 'success',
-        })
+        // ElMessage({
+        //   message: res.msg,
+        //   type: 'success',
+        // })
         next()
       })
     } else {

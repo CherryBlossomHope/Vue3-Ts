@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import ElementPlus from 'element-plus'
 import { ElMessage } from 'element-plus'
+// pinia数据持久化
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
 import router from './router'
@@ -26,7 +28,9 @@ app.config.globalProperties.$errMsg = (message: string) => {
     ElMessage.error(message)
 }
 
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate);
+app.use(pinia)
 app.use(ElementPlus)
-app.use(createPinia())
 app.use(router)
 app.mount('#app')
