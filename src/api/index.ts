@@ -15,7 +15,7 @@ declare module "axios" {
 // 创建axios实例
 const request = axios.create({
     // 请求的域名，基本地址，proxy 代理时会将“/api”以及前置字符串会被替换为真正域名
-    baseURL: '/api',
+    baseURL: import.meta.env.VITE_BASE_API,
     // 跨域请求时发送Cookie
     withCredentials: true, // 视情况而定
     // 超时时间
