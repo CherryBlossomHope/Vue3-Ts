@@ -4,7 +4,7 @@ import type { FormRules, FormInstance } from 'element-plus'
 import { useRouter } from 'vue-router'
 import { useUserInfoStore } from '@/stores/counter'
 import { getUserInfo } from '@/api/request'
-import processLST from '@/utils/processLST'
+import storageClass from '@/utils/storageClass'
 // 使用app.config.globalProperties全局方法
 const { proxy }: any = getCurrentInstance();
 
@@ -46,7 +46,7 @@ const getForm = async (formEl: FormInstance | undefined) => {
                         token: res.data.token,
                         userName: res.data.userName
                     })
-                    processLST.set('USER_INFO', res.data)
+                    storageClass.set('USER_INFO', res.data)
                     proxy.$successMsg(res.msg)
                     setTimeout(() => {
                         router.replace("/")

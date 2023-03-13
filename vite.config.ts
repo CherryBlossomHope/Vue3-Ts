@@ -1,7 +1,7 @@
 import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
+
 
 export default ({ mode }: any) => {
   const env = loadEnv(mode, process.cwd())
@@ -10,10 +10,10 @@ export default ({ mode }: any) => {
     server: {
       port: 3001,
       proxy: {
-        "/api": { // “/api” 以及前置字符串会被替换为真正域名
+        [env.VITE_BASE_API]: { // “/api” 以及前置字符串会被替换为真正域名
           target: env.VITE_BASE_URL, // 请求域名
           changeOrigin: true, // 是否跨域
-          rewrite: (path) => path.replace(/^\/api/, "")
+          rewrite: (path) => path.replace(/^\/env.VITE_BASE_API/, "")
         }
       }
     },

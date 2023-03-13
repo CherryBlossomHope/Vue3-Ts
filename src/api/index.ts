@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
-import processLST from '@/utils/processLST'
+import storageClass from '@/utils/storageClass'
 
 
 // 处理  类型“AxiosResponse<any, any>”上不存在属性
@@ -15,7 +15,7 @@ declare module "axios" {
 // 创建axios实例
 const request = axios.create({
     // 请求的域名，基本地址，proxy 代理时会将“/api”以及前置字符串会被替换为真正域名
-    baseURL: '/api',
+    baseURL: import.meta.env.VITE_BASE_API,
     // 跨域请求时发送Cookie
     withCredentials: true, // 视情况而定
     // 超时时间
@@ -28,8 +28,8 @@ const request = axios.create({
 // 请求拦截器
 request.interceptors.request.use((config) => {
     config.headers = config.headers || {};
-    if (processLST.get('USER_INFO')) {
-        config.headers.token = processLST.get('USER_INFO').token || "";
+    if (storageClass.get('USER_INFO').value) {
+        config.headers.token = storageClass.get('USER_INFO').value.token || "";
     }
     return config;
 });
