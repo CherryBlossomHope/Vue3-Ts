@@ -75,7 +75,7 @@ const tabLists = [
       {
         title: '首页',
         indexNum: '1-1',
-        path: '',
+        path: '/',
         icon: 'HomeFilled',
       },
       {
