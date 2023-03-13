@@ -55,7 +55,7 @@
 import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useUserInfoStore } from '@/stores/counter';
-import { userPermission } from '@/types/userPermission'
+import { userPermission } from '@/enum'
 const store = useUserInfoStore()
 const router = useRouter();
 const route = useRoute()

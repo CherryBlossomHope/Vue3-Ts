@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
-import processLST from '@/utils/processLST'
+import storageClass from '@/utils/storageClass'
 
 
 // 处理  类型“AxiosResponse<any, any>”上不存在属性
@@ -28,8 +28,8 @@ const request = axios.create({
 // 请求拦截器
 request.interceptors.request.use((config) => {
     config.headers = config.headers || {};
-    if (processLST.get('USER_INFO')) {
-        config.headers.token = processLST.get('USER_INFO').token || "";
+    if (storageClass.get('USER_INFO')) {
+        config.headers.token = storageClass.get('USER_INFO').value.token || "";
     }
     return config;
 });
