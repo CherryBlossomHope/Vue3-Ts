@@ -34,7 +34,6 @@ class Storage implements StorageCls {
             }
         } else {
             //否则key值无效
-            console.warn('key值无效')
             return {
                 message: `key值无效`,
                 value: null

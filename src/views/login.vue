@@ -44,7 +44,8 @@ const getForm = async (formEl: FormInstance | undefined) => {
                 if (res.data.token) {
                     store.$patch({
                         token: res.data.token,
-                        userName: res.data.userName
+                        userName: res.data.userName,
+                        permission: res.data.permission
                     })
                     storageClass.set('USER_INFO', res.data)
                     proxy.$successMsg(res.msg)

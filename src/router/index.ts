@@ -55,8 +55,6 @@ router.beforeEach((to, from, next) => {
   document.title = to.meta.title
   if (to.path == '/') {
     if (storageClass.get('USER_INFO').value) {
-      console.log(storageClass.get('USER_INFO'));
-
       getUserInfo({}).then(res => {
         // ElMessage({
         //   message: res.msg,
@@ -65,7 +63,6 @@ router.beforeEach((to, from, next) => {
         next()
       })
     } else {
-      console.log(123);
       next('/login')
     }
   } else {
