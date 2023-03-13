@@ -36,6 +36,7 @@
                 <el-dropdown-item>View</el-dropdown-item>
                 <el-dropdown-item>Add</el-dropdown-item>
                 <el-dropdown-item>Delete</el-dropdown-item>
+                <el-dropdown-item @click="LogOut">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
@@ -52,10 +53,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, getCurrentInstance } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useUserInfoStore } from '@/stores/counter';
 import { userPermission } from '@/enum'
+import storageClass from '@/utils/storageClass'
+const { proxy }: any = getCurrentInstance();
 const store = useUserInfoStore()
 const router = useRouter();
 const route = useRoute()
@@ -64,7 +67,15 @@ const route = useRoute()
 const tabListRoter = (path: string) => {
   router.push(`/${path}`);
 };
-
+// 退出登录
+const LogOut = () => {
+  storageClass.clear()
+  store.$reset()
+  proxy.$successMsg('已退出登录')
+  setTimeout(() => {
+    router.replace('/login')
+  }, 1000);
+}
 //菜单列表
 const tabLists = [
   {

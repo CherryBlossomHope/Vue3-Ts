@@ -1,7 +1,7 @@
 // 用户权限
 export enum userPermission {
     '超级管理员',
-    '王天天'
+    '天天娘娘,万福金安'
 }
 
 // 本地存储

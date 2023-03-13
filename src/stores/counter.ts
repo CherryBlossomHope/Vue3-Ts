@@ -7,7 +7,7 @@ export const useUserInfoStore = defineStore('userInfo', {
     return {
       token: '',
       userName: '',
-      permission: 0
+      permission: NaN
     }
   }
 })
