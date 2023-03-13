@@ -54,7 +54,9 @@ router.beforeEach((to, from, next) => {
   console.log("🥰 ~ file: index.ts:41 ~ router.beforeEach ~ from", from)
   document.title = to.meta.title
   if (to.path == '/') {
-    if (storageClass.get('USER_INFO')) {
+    if (storageClass.get('USER_INFO').value) {
+      console.log(storageClass.get('USER_INFO'));
+
       getUserInfo({}).then(res => {
         // ElMessage({
         //   message: res.msg,

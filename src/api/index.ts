@@ -28,7 +28,7 @@ const request = axios.create({
 // 请求拦截器
 request.interceptors.request.use((config) => {
     config.headers = config.headers || {};
-    if (storageClass.get('USER_INFO')) {
+    if (storageClass.get('USER_INFO').value) {
         config.headers.token = storageClass.get('USER_INFO').value.token || "";
     }
     return config;
