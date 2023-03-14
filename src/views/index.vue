@@ -40,7 +40,7 @@
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-          <span>{{ userPermission[store.permission] }}</span>
+          <span>{{ store.userPermiss }}</span>
         </div>
       </el-header>
       <el-main>
@@ -56,7 +56,6 @@
 import { ref, getCurrentInstance } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useUserInfoStore } from '@/stores/counter';
-import { userPermission } from '@/enum'
 import storageClass from '@/utils/storageClass'
 const { proxy }: any = getCurrentInstance();
 const store = useUserInfoStore()

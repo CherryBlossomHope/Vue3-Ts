@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { userPermission } from '@/enum/index'
 
 export const useUserInfoStore = defineStore('userInfo', {
   // 开启数据持久化
@@ -9,5 +10,8 @@ export const useUserInfoStore = defineStore('userInfo', {
       userName: '',
       permission: NaN
     }
+  },
+  getters: {
+    userPermiss: (state) => userPermission[state.permission]
   }
 })
