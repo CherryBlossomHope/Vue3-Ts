@@ -20,7 +20,7 @@ const menuTree: Array<menuType> = [
             {
                 title: '新闻管理',
                 indexCode: '2-1',
-                path: 'newsManage',
+                path: 'news',
                 icon: 'HomeFilled',
             }
         ]

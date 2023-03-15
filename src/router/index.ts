@@ -22,14 +22,14 @@ const router = createRouter({
       children: [
         {
           path: '',
-          component: () => import('@/views/index.vue'),
+          component: () => import('@/views/index/index.vue'),
           meta: {
             title: '首页'
           },
         },
         {
-          path: 'newsManage',
-          component: () => import("@/views/newsManage/index.vue"),
+          path: 'news',
+          component: () => import("@/views/news/index.vue"),
           meta: {
             title: '新闻'
           },
