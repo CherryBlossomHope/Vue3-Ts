@@ -3,6 +3,7 @@ import { getUserInfo } from '@/api/request'
 import { ElMessage } from 'element-plus';
 import storageClass from '@/utils/storageClass'
 import loginPage from '@/views/login.vue'
+import layout from '@/layout/index.vue'
 
 
 //meta类型定义
@@ -17,12 +18,15 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: "index",
-      component: () => import('@/views/index.vue'),
-      meta: {
-        title: '首页'
-      },
+      component: layout,
       children: [
+        {
+          path: '',
+          component: () => import('@/views/index.vue'),
+          meta: {
+            title: '首页'
+          },
+        },
         {
           path: 'newsManage',
           component: () => import("@/views/newsManage/index.vue"),
@@ -30,7 +34,7 @@ const router = createRouter({
             title: '新闻'
           },
         },
-      ],
+      ]
     },
     {
       path: '/login',
@@ -49,24 +53,24 @@ const router = createRouter({
 })
 
 //判断登录状态 是否进入登录页面
-router.beforeEach((to, from, next) => {
-  console.log("😛 ~ file: index.ts:41 ~ router.beforeEach ~ to", to)
-  console.log("🥰 ~ file: index.ts:41 ~ router.beforeEach ~ from", from)
-  document.title = to.meta.title
-  if (to.path == '/') {
-    if (storageClass.get('USER_INFO').value) {
-      getUserInfo({}).then(res => {
-        // ElMessage({
-        //   message: res.msg,
-        //   type: 'success',
-        // })
-        next()
-      })
-    } else {
-      next('/login')
-    }
-  } else {
-    next()
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   console.log("😛 ~ file: index.ts:41 ~ router.beforeEach ~ to", to)
+//   console.log("🥰 ~ file: index.ts:41 ~ router.beforeEach ~ from", from)
+//   document.title = to.meta.title
+//   if (to.path == '/') {
+//     if (storageClass.get('USER_INFO').value) {
+//       getUserInfo({}).then(res => {
+//         // ElMessage({
+//         //   message: res.msg,
+//         //   type: 'success',
+//         // })
+//         next()
+//       })
+//     } else {
+//       next('/login')
+//     }
+//   } else {
+//     next()
+//   }
+// })
 export default router
