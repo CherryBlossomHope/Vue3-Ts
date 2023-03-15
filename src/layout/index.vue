@@ -1,41 +1,29 @@
 <script lang="ts" setup>
-import type { menuType } from '@/types/layoutLeftTable'
+import type { menuType } from '@/types/layoutMenuType'
 import headerTable from './headerTable/index.vue'
 import leftTable from './leftTable/index.vue'
 
 //菜单列表
 const menuTree: Array<menuType> = [
     {
-        title: '菜单一',
-        indexNum: '1',
+        title: '首页',
+        indexCode: '1',
+        path: '/',
+        icon: 'HomeFilled',
+    },
+    {
+        title: '新闻',
+        indexCode: '2',
+        path: '',
         icon: 'Menu',
         children: [
             {
-                title: '首页',
-                indexNum: '1-1',
-                path: '/',
-                icon: 'HomeFilled',
-            },
-            {
-                title: '新闻',
-                indexNum: '1-2',
+                title: '新闻管理',
+                indexCode: '2-1',
                 path: 'newsManage',
-                icon: 'Comment',
-                children: [
-                    {
-                        title: '新闻1',
-                        indexNum: '1-2-1',
-                        icon: 'Comment',
-                        path: '',
-                    }
-                ]
-            },
-        ],
-    },
-    {
-        title: '菜单二',
-        indexNum: '2',
-        icon: 'Menu',
+                icon: 'HomeFilled',
+            }
+        ]
     }
 ];
 </script>
@@ -48,7 +36,9 @@ const menuTree: Array<menuType> = [
         <el-container>
             <el-aside width="200px">
                 <el-scrollbar>
-                    <leftTable :menuTree="menuTree" />
+                    <el-menu>
+                        <leftTable :menuTree="menuTree" />
+                    </el-menu>
                 </el-scrollbar>
             </el-aside>
             <el-main>

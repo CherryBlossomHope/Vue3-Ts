@@ -1,6 +1,6 @@
 export interface menuType {
     title: string,
-    indexNum: string,
+    indexCode: string,
     icon?: string,
     path?: string,
     children?: Array<menuType>
