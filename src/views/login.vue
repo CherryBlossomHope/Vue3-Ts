@@ -43,13 +43,13 @@ const getForm = async (formEl: FormInstance | undefined) => {
             getUserInfo(toRaw(userLogin)).then(res => {
                 LoadingBtn.value = true
                 console.log(res);
-                if (res.data.token) {
+                if (res.token) {
                     store.$patch({
-                        token: res.data.token,
+                        token: res.token,
                         userName: res.data.userName,
                         permission: res.data.permission
                     })
-                    storageClass.set('USER_INFO', res.data)
+                    storageClass.set('USER_INFO', res.token)
                     proxy.$successMsg(res.msg)
                     setTimeout(() => {
                         router.replace("/")

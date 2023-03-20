@@ -6,7 +6,9 @@ import storageClass from '@/utils/storageClass'
 // 处理  类型“AxiosResponse<any, any>”上不存在属性
 declare module "axios" {
     interface AxiosResponse<T = any> {
-        msg: any;
+        msg?: string
+        code?: number
+        token?: string
         // 这里追加你的参数
     }
     export function create(config?: AxiosRequestConfig): AxiosInstance;
@@ -29,7 +31,7 @@ const request = axios.create({
 request.interceptors.request.use((config) => {
     config.headers = config.headers || {};
     if (storageClass.get('USER_INFO').value) {
-        config.headers.token = storageClass.get('USER_INFO').value.token || "";
+        config.headers.token = storageClass.get('USER_INFO').value || "";
     }
     return config;
 });

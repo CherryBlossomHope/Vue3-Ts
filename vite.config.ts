@@ -13,7 +13,7 @@ export default ({ mode }: any) => {
         [env.VITE_BASE_API]: { // “/api” 以及前置字符串会被替换为真正域名
           target: env.VITE_BASE_URL, // 请求域名
           changeOrigin: true, // 是否跨域
-          rewrite: (path) => path.replace(env.VITE_BASE_API, "")
+          rewrite: (path) => path.replace(env.VITE_BASE_API, '')
         }
       }
     },
