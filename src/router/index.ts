@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { getUserInfo } from '@/api/request'
+import { userLoginApi } from '@/api/user'
 import { ElMessage } from 'element-plus';
 import storageClass from '@/utils/storageClass'
 import loginPage from '@/views/login.vue'
@@ -59,7 +59,7 @@ router.beforeEach((to, from, next) => {
   document.title = to.meta.title
   if (to.path == '/') {
     if (storageClass.get('USER_INFO').value) {
-      // getUserInfo({}).then(res => {
+      // userLoginApi({}).then(res => {
       //   // ElMessage({
       //   //   message: res.msg,
       //   //   type: 'success',
