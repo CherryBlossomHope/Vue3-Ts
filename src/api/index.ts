@@ -51,14 +51,35 @@ request.interceptors.response.use((response) => {
 const ResponseProcessing = (error: any) => {
     if (error.response) {
         switch (error.response.status) {
+            case 400:
+                ElMessage.warning("请求失败！请您稍后重试");
+                break;
             case 401:
-                ElMessage.warning("资源没有访问权限！");
+                ElMessage.warning("登录失效！请您重新登录");
+                break;
+            case 403:
+                ElMessage.warning("当前账号无权限访问！");
                 break;
             case 404:
-                ElMessage.warning("接口不存在，请检查接口地址是否正确！");
+                ElMessage.warning("你所访问的资源不存在！");
+                break;
+            case 405:
+                ElMessage.warning("请求方式错误！请您稍后重试");
+                break;
+            case 408:
+                ElMessage.warning("请求超时！请您稍后重试");
                 break;
             case 500:
-                ElMessage.warning("内部服务器错误，请联系系统管理员！");
+                ElMessage.warning("服务异常！");
+                break;
+            case 502:
+                ElMessage.warning("网关错误！");
+                break;
+            case 503:
+                ElMessage.warning("服务不可用！");
+                break;
+            case 504:
+                ElMessage.warning("网关超时！");
                 break;
             default:
                 return Promise.reject(error.response.data); // 返回接口返回的错误信息
