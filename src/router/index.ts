@@ -19,16 +19,17 @@ const router = createRouter({
     {
       path: '/',
       component: layout,
+      redirect: '/index',
       children: [
         {
-          path: '',
+          path: '/index',
           component: () => import('@/views/index/index.vue'),
           meta: {
             title: '首页'
           },
         },
         {
-          path: 'news',
+          path: '/news',
           component: () => import("@/views/news/index.vue"),
           meta: {
             title: '新闻'
@@ -53,25 +54,25 @@ const router = createRouter({
 })
 
 //判断登录状态 是否进入登录页面
-router.beforeEach((to, from, next) => {
-  console.log("😛 ~ file: index.ts:41 ~ router.beforeEach ~ to", to)
-  console.log("🥰 ~ file: index.ts:41 ~ router.beforeEach ~ from", from)
-  document.title = to.meta.title
-  if (to.path == '/') {
-    if (storageClass.get('USER_INFO').value) {
-      // userLoginApi({}).then(res => {
-      //   // ElMessage({
-      //   //   message: res.msg,
-      //   //   type: 'success',
-      //   // })
-      //   // next()
-      // })
-      next()
-    } else {
-      next('/login')
-    }
-  } else {
-    next()
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   console.log("😛 ~ file: index.ts:41 ~ router.beforeEach ~ to", to)
+//   console.log("🥰 ~ file: index.ts:41 ~ router.beforeEach ~ from", from)
+//   document.title = to.meta.title
+//   if (to.path == '/') {
+//     if (storageClass.get('USER_INFO').value) {
+//       // userLoginApi({}).then(res => {
+//       //   // ElMessage({
+//       //   //   message: res.msg,
+//       //   //   type: 'success',
+//       //   // })
+//       //   // next()
+//       // })
+//       next()
+//     } else {
+//       next('/login')
+//     }
+//   } else {
+//     next()
+//   }
+// })
 export default router

@@ -8,7 +8,7 @@ const menuTree: Array<menuType> = [
     {
         title: '首页',
         indexCode: '1',
-        path: '/',
+        path: '/index',
         icon: 'HomeFilled',
     },
     {
@@ -20,7 +20,7 @@ const menuTree: Array<menuType> = [
             {
                 title: '新闻管理',
                 indexCode: '2-1',
-                path: 'news',
+                path: '/news',
                 icon: 'HomeFilled',
             }
         ]
