@@ -1,4 +1,4 @@
-import request from './index';
+import request from '@/utils/request';
 import type { userInfoType } from '@/types/login'
 
 // 用户登录
