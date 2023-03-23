@@ -30,7 +30,7 @@ app.config.globalProperties.$errMsg = (message: string) => {
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate);
-app.use(pinia)
 app.use(ElementPlus)
 app.use(router)
+app.use(pinia)
 app.mount('#app')
