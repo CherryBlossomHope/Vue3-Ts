@@ -5,6 +5,8 @@ import { ElMessage } from 'element-plus'
 // pinia数据持久化
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import 'element-plus/dist/index.css'
+// element ui 黑夜模式css引入
+import 'element-plus/theme-chalk/dark/css-vars.css'
 import App from './App.vue'
 import router from './router'
 // 获取动态菜单 设置路由

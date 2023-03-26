@@ -17,7 +17,7 @@ getMenuList().then(res => {
 
 <template>
     <el-container class="layout-container-demo" style="height: 100vh">
-        <el-header style="text-align: right; font-size: 12px">
+        <el-header style="font-size: 12px">
             <headerTable />
         </el-header>
         <el-container>
@@ -28,7 +28,7 @@ getMenuList().then(res => {
                     </el-menu>
                 </el-scrollbar>
             </el-aside>
-            <el-main>
+            <el-main class="main_box">
                 <el-scrollbar>
                     <RouterView></RouterView>
                 </el-scrollbar>
@@ -63,5 +63,9 @@ getMenuList().then(res => {
     justify-content: center;
     height: 100%;
     right: 20px;
+}
+
+.main_box {
+    padding: 15px !important;
 }
 </style>
