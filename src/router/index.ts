@@ -45,7 +45,7 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   console.log("😛 ~ file: index.ts:41 ~ router.beforeEach ~ to", to)
   console.log("🥰 ~ file: index.ts:41 ~ router.beforeEach ~ from", from)
-  document.title = to.meta.title
+  // document.title = to.meta.title
   if (!storageClass.get('USER_INFO').value && to.path != '/login') {
     next({ path: '/login' })
   } else {
