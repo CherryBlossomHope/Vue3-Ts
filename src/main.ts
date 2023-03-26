@@ -7,6 +7,8 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
 import router from './router'
+// 获取动态菜单 设置路由
+import { getMenuList } from '@/api/menu'
 
 //引入Element图表库
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
@@ -31,6 +33,21 @@ app.config.globalProperties.$errMsg = (message: string) => {
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate);
 app.use(ElementPlus)
-app.use(router)
 app.use(pinia)
-app.mount('#app')
+// 动态绑定路由
+const addDynamicRoute = async () => {
+    const { data } = await getMenuList()
+    await data.forEach((i: any) => {
+        router.addRoute('layout', {
+            path: i.path,
+            component: () => import(`@/views/${i.component}/index.vue`),
+            meta: {
+                title: i.title
+            }
+        })
+    });
+    app.use(router)
+    app.mount('#app')
+}
+addDynamicRoute()
+

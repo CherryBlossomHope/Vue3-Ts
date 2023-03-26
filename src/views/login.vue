@@ -86,10 +86,16 @@ const finshRegister = async (formEl: FormInstance | undefined) => {
     if (!formEl) return
     await formEl.validate((valid) => {
         if (valid) {
-
+            userRegisterApi(toRaw(userRegister)).then(res => {
+                if (res.code == 200) {
+                    proxy.$successMsg(res.msg)
+                    toggleLoR(true)
+                } else {
+                    proxy.$errMsg('注册失败')
+                }
+            })
         }
     })
-
 }
 
 // 登录 <--> 注册
@@ -97,7 +103,7 @@ const styleSwitching = ref()
 const changeLogin = ref(true)
 const changeRegister = ref(false)
 /**
- * @param {Boolean} val 注册->登录(ture) 登录->注册(false)
+ * @param {Boolean} val 注册->登录(true) 登录->注册(false)
  */
 const toggleLoR = (val: boolean) => {
     if (val) {

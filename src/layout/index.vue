@@ -1,31 +1,18 @@
 <script lang="ts" setup>
+import { reactive } from 'vue';
 import type { menuType } from '@/types/layoutMenuType'
+import { getMenuList } from '@/api/menu'
 import headerTable from './headerTable/index.vue'
 import leftTable from './leftTable/index.vue'
 
-//菜单列表
-const menuTree: Array<menuType> = [
-    {
-        title: '首页',
-        indexCode: '1',
-        path: '/index',
-        icon: 'HomeFilled',
-    },
-    {
-        title: '新闻',
-        indexCode: '2',
-        path: '',
-        icon: 'Menu',
-        children: [
-            {
-                title: '新闻管理',
-                indexCode: '2-1',
-                path: '/news',
-                icon: 'HomeFilled',
-            }
-        ]
-    }
-];
+//获取菜单列表
+const menuTree = reactive<Array<menuType>>([])
+getMenuList().then(res => {
+    res.data.sort((a: any, b: any) => {
+        return a.indexCode - b.indexCode
+    })
+    menuTree.push(...res.data)
+})
 </script>
 
 <template>
